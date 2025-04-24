@@ -1,5 +1,6 @@
 package com.praticando.screenmatch.principal;
 
+import com.praticando.screenmatch.model.DadosEpisodio;
 import com.praticando.screenmatch.model.DadosSerie;
 import com.praticando.screenmatch.model.DadosTemporada;
 import com.praticando.screenmatch.service.ConsumoApi;
@@ -35,5 +36,7 @@ public class Principal {
             listaDadosTemporada.add(dadosTemporada);
         }
         listaDadosTemporada.forEach(System.out::println);
+        //lambda para imprimir os titulos dos episodios ao inves de usar for
+        listaDadosTemporada.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
     }
 }
