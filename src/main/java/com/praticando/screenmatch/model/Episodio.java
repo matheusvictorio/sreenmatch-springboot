@@ -22,7 +22,7 @@ public class Episodio {
         try {
             this.dataLancamento = LocalDate.parse(dadosEpisodio.dataLancamento());
         }catch (DateTimeParseException e) {
-            this.dataLancamento = LocalDate.now();
+            this.dataLancamento = null;
         }
     }
 
