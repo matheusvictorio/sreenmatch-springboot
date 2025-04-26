@@ -9,10 +9,7 @@ import com.praticando.screenmatch.service.ConverteDados;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -61,6 +58,18 @@ public class Principal {
                 ).collect(Collectors.toList());
 
         episodios.forEach(System.out::println);
+
+        System.out.println("Digite o trecho que deseja buscar no titulo do episodio:");
+        var trechoTitulo = sc.nextLine();
+        Optional<Episodio> episodioBuscado = episodios.stream()
+                        .filter(e -> e.getTitulo().toLowerCase().contains(trechoTitulo.toLowerCase()))
+                                .findFirst();
+        if (episodioBuscado.isPresent()) {
+            System.out.println("Episodio encontrado: " + episodioBuscado.get().getTitulo() + " na temporada " + episodioBuscado.get().getTemporada());
+        }
+        else {
+            System.out.println("Episodio não encontrado");
+        }
 
         System.out.println("A partir de que ano deseja buscar os episodios?");
         var ano = sc.nextInt();
