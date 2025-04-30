@@ -9,7 +9,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record DadosSerie(@JsonAlias("Title") String titulo,
                          @JsonAlias("totalSeasons") Integer totalTemporadas,
-                         @JsonAlias("imdbRating") String avaliacao
+                         @JsonAlias("imdbRating") String avaliacao,
+                         @JsonAlias("Genre") String genero,
+                         @JsonAlias("Actors") String atores,
+                         @JsonAlias("Poster") String poster,
+                         @JsonAlias("Plot") String sinopse
 // O @JsonAlias é usado apenas para leitura de dados do JSON, permitindo que múltiplos nomes sejam reconhecidos ao desserializar.
 // Já o @JsonProperty pode ser utilizado tanto para leitura quanto para escrita, ou seja, ele define como o atributo será nomeado tanto ao ler do JSON quanto ao gerar um JSON a partir da classe.
             ) {

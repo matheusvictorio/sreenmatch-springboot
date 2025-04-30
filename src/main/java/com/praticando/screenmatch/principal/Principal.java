@@ -1,9 +1,7 @@
 package com.praticando.screenmatch.principal;
 
-import com.praticando.screenmatch.model.DadosEpisodio;
-import com.praticando.screenmatch.model.DadosSerie;
-import com.praticando.screenmatch.model.DadosTemporada;
-import com.praticando.screenmatch.model.Episodio;
+import com.praticando.screenmatch.model.*;
+import com.praticando.screenmatch.repository.SerieRepository;
 import com.praticando.screenmatch.service.ConsumoApi;
 import com.praticando.screenmatch.service.ConverteDados;
 
@@ -23,6 +21,13 @@ public class Principal {
     private final String ENDERECO= "https://www.omdbapi.com/?t=";
     private final String API_KEY = "&apikey=6585022c";
     private List<DadosSerie> dadosSerie = new ArrayList<>();
+
+    private SerieRepository serieRepository;
+
+    public Principal(SerieRepository serieRepository) {
+        this.serieRepository = serieRepository;
+    }
+
 
     public void exibeMenu() {
         var opcao = -1;
@@ -61,7 +66,8 @@ public class Principal {
 
     private void buscarSerieWeb() {
         DadosSerie dados = getDadosSerie();
-        dadosSerie.add(dados);
+        Serie serie = new Serie(dados);
+        serieRepository.save(serie);
         System.out.println(dados);
     }
 
