@@ -188,7 +188,7 @@ public class Principal {
         System.out.println("Digite a avaliação mínima para a busca: ");
         var avaliacao = sc.nextDouble();
 
-        List<Serie> seriesNichadas = serieRepository.findByTotalTemporadasLessThanEqualAndAvaliacaoGreaterThanEqual(numeroTemporada, avaliacao);
+        List<Serie> seriesNichadas = serieRepository.seriesPorTemporadasEAvaliacao(numeroTemporada, avaliacao);
         System.out.println("Séries em que a quantidade de temporadas é igual ou menor que " + numeroTemporada + " e a avaliação é igual ou maior que " + avaliacao);
         seriesNichadas.forEach(s->
                 System.out.println(s.getTitulo() + ", temporadas: " + s.getTotalTemporadas() + ",avaliação: " + s.getAvaliacao()));
