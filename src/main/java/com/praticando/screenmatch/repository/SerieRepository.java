@@ -1,6 +1,7 @@
 package com.praticando.screenmatch.repository;
 
 import com.praticando.screenmatch.model.Categoria;
+import com.praticando.screenmatch.model.Episodio;
 import com.praticando.screenmatch.model.Serie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -25,5 +26,9 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
     //JPQL
     @Query("select s from Serie s where s.totalTemporadas <= :totalTemporadas and s.avaliacao >= :avaliacao")
     List<Serie> seriesPorTemporadasEAvaliacao(Integer totalTemporadas, Double avaliacao);
+
+    @Query("select e from Serie s join s.episodios e where e.titulo ILIKE :nomeEpisodio")
+    List<Episodio> episodiosPorTrecho(String nomeEpisodio);
+
 
 }
