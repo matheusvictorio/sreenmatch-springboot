@@ -40,6 +40,8 @@ public class Principal {
                 3 - Listar séries buscadas
                 4 - Buscar série por titulo
                 5 - Buscar sério por ator
+                6 - Buscar top 5 séries
+                7 - Buscar série por categoria
                 
                 0 - Sair
                 """;
@@ -63,6 +65,12 @@ public class Principal {
                 break;
             case 5:
                 buscarSeriesPorAtor();
+                break;
+            case 6:
+                buscarTop5Serie();
+                break;
+            case 7:
+                buscarSeriePorCategoria();
                 break;
             case 0:
                 System.out.println("Saindo...");
@@ -150,6 +158,23 @@ public class Principal {
         List<Serie> seriesPorAtor = serieRepository.findByAtoresContainingIgnoreCaseAndAvaliacaoGreaterThanEqual(nomeAtor, avaliacao);
         System.out.println("Séries em que o ator '" + nomeAtor + "' aparece: ");
         seriesPorAtor.forEach(s ->
+                System.out.println(s.getTitulo() + " avaliação: " + s.getAvaliacao()));
+    }
+
+    private void buscarTop5Serie() {
+        List<Serie> serieTop = serieRepository.findTop5ByOrderByAvaliacaoDesc();
+        System.out.println("Séries com maior avaliação: ");
+        serieTop.forEach(s ->
+                System.out.println(s.getTitulo() + " avaliação: " + s.getAvaliacao()));
+    }
+    private void buscarSeriePorCategoria() {
+        System.out.println("Digite a categoria para busca");
+        var nomeCategoria = sc.nextLine();
+        Categoria categoria = Categoria.fromPortugues(nomeCategoria);
+
+        List<Serie> seriesPorCategoria = serieRepository.findByGenero(categoria);
+        System.out.println("Séries em que a categoria '" + categoria + "' aparece: ");
+        seriesPorCategoria.forEach(s ->
                 System.out.println(s.getTitulo() + " avaliação: " + s.getAvaliacao()));
     }
 }
