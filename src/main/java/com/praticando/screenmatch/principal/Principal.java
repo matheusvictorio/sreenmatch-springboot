@@ -142,6 +142,15 @@ public class Principal {
         }
     }
 
-
+    private void buscarSeriesPorAtor() {
+        System.out.println("Digite o nome do ator para busca");
+        var nomeAtor = sc.nextLine();
+        System.out.println("Avaliação mínima para a busca");
+        var avaliacao = sc.nextDouble();
+        List<Serie> seriesPorAtor = serieRepository.findByAtoresContainingIgnoreCaseAndAvaliacaoGreaterThanEqual(nomeAtor, avaliacao);
+        System.out.println("Séries em que o ator '" + nomeAtor + "' aparece: ");
+        seriesPorAtor.forEach(s ->
+                System.out.println(s.getTitulo() + " avaliação: " + s.getAvaliacao()));
+    }
 }
 
