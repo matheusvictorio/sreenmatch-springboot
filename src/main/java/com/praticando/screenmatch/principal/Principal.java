@@ -42,6 +42,7 @@ public class Principal {
                 5 - Buscar sério por ator
                 6 - Buscar top 5 séries
                 7 - Buscar série por categoria
+                8 - Buscar série por numero de temporadas e avaliação
                 
                 0 - Sair
                 """;
@@ -71,6 +72,9 @@ public class Principal {
                 break;
             case 7:
                 buscarSeriePorCategoria();
+                break;
+            case 8:
+                buscarSeriePorNumeroTemporadaAvaliacao();
                 break;
             case 0:
                 System.out.println("Saindo...");
@@ -176,6 +180,18 @@ public class Principal {
         System.out.println("Séries em que a categoria '" + categoria + "' aparece: ");
         seriesPorCategoria.forEach(s ->
                 System.out.println(s.getTitulo() + " avaliação: " + s.getAvaliacao()));
+    }
+
+    private void buscarSeriePorNumeroTemporadaAvaliacao() {
+        System.out.println("Digite o número de temporadas para busca: ");
+        var numeroTemporada = sc.nextInt();
+        System.out.println("Digite a avaliação mínima para a busca: ");
+        var avaliacao = sc.nextDouble();
+
+        List<Serie> seriesNichadas = serieRepository.findByTotalTemporadasLessThanEqualAndAvaliacaoGreaterThanEqual(numeroTemporada, avaliacao);
+        System.out.println("Séries em que a quantidade de temporadas é igual ou menor que " + numeroTemporada + " e a avaliação é igual ou maior que " + avaliacao);
+        seriesNichadas.forEach(s->
+                System.out.println(s.getTitulo() + ", temporadas: " + s.getTotalTemporadas() + ",avaliação: " + s.getAvaliacao()));
     }
 }
 
