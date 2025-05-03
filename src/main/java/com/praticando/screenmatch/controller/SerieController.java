@@ -2,6 +2,7 @@ package com.praticando.screenmatch.controller;
 
 import com.praticando.screenmatch.dto.EpisodiosDTO;
 import com.praticando.screenmatch.dto.SerieDTO;
+import com.praticando.screenmatch.model.Categoria;
 import com.praticando.screenmatch.service.SerieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,5 +45,10 @@ public class SerieController {
     @GetMapping("/{id}/temporadas/{numero}")
     public List<EpisodiosDTO> obterTemporadaPorNumero(@PathVariable Long id, @PathVariable Long numero){
         return serieService.obterTemporadaPorNumero(id, numero);
+    }
+
+    @GetMapping("/categoria/{nomeGenero}")
+    public List<SerieDTO> obterSeriePorCategoria(@PathVariable String nomeGenero){
+        return serieService.obterSeriePorCategoria(nomeGenero);
     }
 }

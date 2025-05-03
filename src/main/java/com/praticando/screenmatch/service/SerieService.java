@@ -2,6 +2,7 @@ package com.praticando.screenmatch.service;
 
 import com.praticando.screenmatch.dto.EpisodiosDTO;
 import com.praticando.screenmatch.dto.SerieDTO;
+import com.praticando.screenmatch.model.Categoria;
 import com.praticando.screenmatch.model.Serie;
 import com.praticando.screenmatch.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +61,10 @@ public class SerieService {
         return serieRepository.episodiosPorTemporada(id, numero).stream()
                 .map(e -> new EpisodiosDTO(e.getTemporada(), e.getNumeroEpisodio(), e.getTitulo()))
                 .collect(Collectors.toList());
+    }
+
+    public List<SerieDTO> obterSeriePorCategoria(String nomeGenero) {
+        Categoria categoria = Categoria.fromPortugues(nomeGenero);
+        return converterDados(serieRepository.findByGenero(categoria));
     }
 }
