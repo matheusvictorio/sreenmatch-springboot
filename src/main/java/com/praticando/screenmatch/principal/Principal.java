@@ -223,7 +223,7 @@ public class Principal {
         if (serieBuscada.isPresent()) {
             Serie serie = serieBuscada.get();
             List<Episodio> topEpisodios = serieRepository.topEpisodiosPorSerie(serie);
-            topEpisodios.forEach(e -> System.out.printf("Série: %s, Temporada: %d, Episódio: %d - %s , Avaliação: %.2f\n", e.getSerie().getTitulo(), e.getTemporada(), e.getNumero() ,e.getTitulo(), e.getAvaliacao()));
+            topEpisodios.forEach(e -> System.out.printf("Série: %s, Temporada: %d, Episódio: %d - %s , Avaliação: %.2f\n", e.getSerie().getTitulo(), e.getTemporada(), e.getNumeroEpisodio() ,e.getTitulo(), e.getAvaliacao()));
         }
     }
 
@@ -234,7 +234,7 @@ public class Principal {
             var anoLimite = sc.nextInt();
 
             List<Episodio> episodiosAno = serieRepository.episodiosPorSerieEAno(serieBuscada.get(), anoLimite);
-            episodiosAno.forEach(e -> System.out.printf("Série: %s, Temporada: %d, Episódio: %d - %s , Avaliação: %.2f\n", e.getSerie().getTitulo(), e.getTemporada(), e.getNumero() ,e.getTitulo(), e.getAvaliacao()));
+            episodiosAno.forEach(e -> System.out.printf("Série: %s, Temporada: %d, Episódio: %d - %s , Avaliação: %.2f\n", e.getSerie().getTitulo(), e.getTemporada(), e.getNumeroEpisodio() ,e.getTitulo(), e.getAvaliacao()));
 
         }
     }
